@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Notes Buddy</title>
+  <link rel="stylesheet" href="sy.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Smart Notes Buddy</h1>
+      <p>Type or upload your notes, then generate summaries, quizzes, or clear doubts.</p>
+    </header>
+
+    <div class="top-controls">
+      <div class="color-picker">
+        <label for="bgColor">Change Background Color:</label>
+        <input type="color" id="bgColor" value="#dbeafe">
+      </div>
+
+      <div class="theme-toggle">
+        <label class="switch">
+          <input type="checkbox" id="themeSwitch">
+          <span class="slider round"></span>
+        </label>
+        <span id="themeLabel">Bright Mode</span>
+      </div>
+    </div>
+
+    <section class="main-section">
+      <div class="input-section">
+        <div class="text-area">
+          <textarea id="inputText" placeholder="Type or paste your notes here..."></textarea>
+        </div>
+
+        <div class="file-upload">
+          <label for="fileInput" class="file-label">Upload File</label>
+          <input type="file" id="fileInput" accept=".txt,.pdf,.docx">
+        </div>
+
+        <div class="button-group">
+          <button id="notesBtn" class="wide-btn">Generate Notes</button>
+          <button id="quizBtn" class="wide-btn hidden">Generate Quiz</button>
+          <button id="doubtBtn" class="wide-btn hidden">Ask Doubt</button>
+          <button id="clearBtn" class="clear-btn wide-btn">Clear</button>
+        </div>
+      </div>
+
+      <div id="outputBox" class="output-box">
+        <p>Results will appear here...</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="not.js"></script>
+</body>
+</html>

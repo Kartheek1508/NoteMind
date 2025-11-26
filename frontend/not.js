@@ -31,16 +31,26 @@ const outputBox = document.getElementById("outputBox");
 const quizBtn = document.getElementById("quizBtn");
 const doubtBtn = document.getElementById("doubtBtn");
 
-document.getElementById("notesBtn").addEventListener("click", () => {
+document.getElementById("notesBtn").addEventListener("click", async () => {
   const text = inputBox.value.trim();
   if (!text) {
     outputBox.innerHTML = "<p>Please enter or upload some notes first.</p>";
     return;
   }
-  outputBox.innerHTML = createNotes(text);
+
+  // Call FastAPI backend
+  const res = await fetch("http://127.0.0.1:8000/notes/summarize", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text })
+  });
+  const data = await res.json();
+
+  outputBox.innerHTML = `<h3>Summary</h3><p>${data.res}</p>`;
   quizBtn.classList.remove("hidden");
   doubtBtn.classList.remove("hidden");
 });
+
 
 quizBtn.addEventListener("click", () => {
   const text = inputBox.value.trim();
@@ -69,16 +79,4 @@ document.getElementById("fileInput").addEventListener("change", (e) => {
     inputBox.value = event.target.result;
   };
   reader.readAsText(file);
-});
-
-document.getElementById("bgColor").addEventListener("input", (e) => {
-  document.body.style.background = e.target.value;
-});
-
-const themeSwitch = document.getElementById("themeSwitch");
-const themeLabel = document.getElementById("themeLabel");
-
-themeSwitch.addEventListener("change", () => {
-  document.body.classList.toggle("dark-mode");
-  themeLabel.textContent = themeSwitch.checked ? "🌙 Dark Mode" : "🌞 Bright Mode";
 });

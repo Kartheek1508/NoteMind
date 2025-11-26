@@ -1,13 +1,14 @@
 from fastapi import APIRouter
-from models.schemas import NoteInput, DoubtInput, GenQ
-from services.notes_service import summarize_f, ans_doubt, questions
+from backend.models.schemas import NoteInput, DoubtInput, GenQ
+from backend.services.notes_services import summarize_f, ans_doubt, questions
+
 
 router = APIRouter(prefix="/notes")
 
 @router.post("/summarize")
 async def summarize(data: NoteInput):
     prompt = f"Can you summarize this for me: {data.text}"
-    return {"summary": summarize_f(prompt)}
+    return {"res": summarize_f(prompt)}
 
 @router.post("/ask_doubt")
 async def ask_doubt_endpoint(data: DoubtInput):

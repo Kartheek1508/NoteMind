@@ -22,3 +22,7 @@ async def ask_doubt_endpoint(data: DoubtInput):
 async def generate_q_endpoint(data: GenQ):
     prompt = f"Based on these notes: {data.text}. Generate a set of questions."
     return {"questions": questions(prompt)}
+
+@router.get("/health")
+async def health_check():
+    return {"status": "OK"}
